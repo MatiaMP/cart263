@@ -1,0 +1,20 @@
+
+window.onload = function(){
+    console.log("keys");
+
+    let speedX = 5;
+    let boxA = this.document.querySelector("#boxA");
+
+    window.addEventListener("keydown", 
+        function(e) {
+    if(e.key === "ArrowRight"){
+        console.log(parseInt(boxA.style.left))
+        let currentPos = parseInt(boxA.style.left)
+        boxA.style.left = currentPos+speedX+"px"
+    }
+})
+
+
+}
+
+    
