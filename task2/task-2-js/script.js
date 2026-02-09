@@ -102,6 +102,14 @@ assign the element from innerContainers variable with the same index
 a background using that color.
 /***CODE */
 
+let colors = ['red','blue','green','orange'];
+let innerContainers = document.getElementsByClassName("inner-container");
+
+for(let i = 0; i < colors.length; i++){
+    if(innerContainers[i]){
+        innerContainers[i].style.backgroundColor = colors[i];
+    }
+}
 /*************************************** */
 /*** END PART TWO MODIFY */ 
 
@@ -123,7 +131,7 @@ function customCreateElement(parent){
     let newParagraph = document.createElement("p");
 
     /* 1D:  Set the text of this element to be : `using create Element`*/
-    newParagraph.innerHTML = "using create Element";
+    newParagraph.textContent = "using create Element";
 
     /* 1E:  Set the background of this paragraph element to be green */
     newParagraph.style.backgroundColor = "green";
@@ -182,7 +190,7 @@ function customNewBoxCreate(parent){
 /* 2F: You will see at this point that the x,y position of the resulting divs makes no sense... 
     Fix this by doing the following: every time you call customNewBoxCreate() - save the current returned element 
     in a variable i.e. returnedDiv. 
-    Set the style (left and top) to the of this element to 
+    //Set the style (left and top) to the of this element to 
     the necessary x and y position (use the counter variables in the for nested for loop to 
     calculate the new positions.*/ 555
 
