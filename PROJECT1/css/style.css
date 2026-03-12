@@ -71,6 +71,24 @@ body, html{
     transition: background-color 0.3s;
     pointer-events: none;
 }
+
+#end-screen {
+    display: none; 
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    color: red;
+    display: none; 
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 10000;
+    cursor: pointer; 
+}
+
 .tree {
     position: absolute;
     width: 20px;  

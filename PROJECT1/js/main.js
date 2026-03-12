@@ -173,6 +173,18 @@ function updateEnvironment(){
             const darkness = Math.max(255 - (extractionCount * 5), 60);
             cloud.style.backgroundColor = `rgb(${darkness}, ${darkness}, ${darkness})`;
         })
+
+    if (extractionCount >= 50) {
+    const endScreen = document.getElementById('end-screen');
+    
+    // Show the end screen
+    endScreen.style.display = 'flex'; 
+
+    // game restarts when the click the screen
+    endScreen.onclick = function() {
+        location.reload();
+    };
+}
 }
 
 
