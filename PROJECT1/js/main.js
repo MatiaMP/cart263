@@ -2,6 +2,7 @@ const ground = document.getElementById('ground');
 const sky = document.getElementById('world');
 const clouds = []; 
 const glitches = [];
+const keys = {};
 const lifeContainer = document.getElementById('life-container');
 const counterDisplay = document.getElementById('counter');
 const statusMsg = document.getElementById('status-msg');
@@ -75,7 +76,31 @@ function createTree(x, y){
 animate();
 
 function animate(){
-    
+    // movement
+    if(!character.style.left) character.style.left = "100px";
+    if(!character.style.top) character.style.top = "600px";
+
+    let currentX = parseInt(character.style.left);
+    let currentY = parseInt(character.style.top);
+
+    // checks keys
+
+    if (keys["ArrowRight"] && currentX < window.innerWidth - 40){
+        character.style.left = (currentX + 8) + "px"; //8ox is movement speed per frame
+    }
+
+    if (keys["ArrowLeft"] && currentX > 0) {
+        character.style.left = (currentX - 8) + "px";
+    }
+
+    if (keys["ArrowUp"] && currentY > window.innerHeight * 0.7) {
+        character.style.top = (currentY - 8) + "px";
+    }
+
+    if (keys["ArrowDown"] && currentY < window.innerHeight - 60) {
+        character.style.top = (currentY + 8) + "px";
+    }
+
     // moves the clouds across the screen
     clouds.forEach(cloudObj => {
         cloudObj.x += cloudObj.speed;
@@ -151,53 +176,23 @@ function updateEnvironment(){
 }
 
 
-// character movement
-window.addEventListener("keydown", function(e){
+// checks whay key is held down
 
-    // where the character starts
-    if(!character.style.left){
-        character.style.left = "100px";
-    }
+window.addEventListener("keydown", (e) => {
+    keys[e.code] = true;
 
-     // where the character starts
-    if(!character.style.top){
-        character.style.top = "600px";
-    }
-
-    //turns px to actual number for matg=
-    let currentX = parseInt(character.style.left);
-    let currentY = parseInt(character.style.top);
-    
-    
-    // makes sure that the character stays in the limits of the grass
-
-    if (e.key === "ArrowRight" && currentX < window.innerWidth - 40) {
-        character.style.left = (currentX + speedX) + "px";
-    }
-    if (e.key === "ArrowLeft" && currentX > 0) {
-        character.style.left = (currentX - speedX) + "px";
-    }
-    if (e.key === "ArrowUp" && currentY > window.innerHeight * 0.7) {
-        character.style.top = (currentY - speedY) + "px";
-    }
-    if (e.key === "ArrowDown" && currentY < window.innerHeight - 60) {
-        character.style.top = (currentY + speedY) + "px";
-    }
-
-
-    // when user presses space, a tree or glitch is planted
     if(e.code === "Space"){
         extractionCount++;
         counterDisplay.innerText = extractionCount;
 
-        // makes sure planted tree is alligned with character
+        let currentX = parseInt(character.style.left) || 100;
+        let currentY = parseInt(character.style.top) || 600;
 
-        let plantX = currentX + 20;
-        let plantY = currentY + 60;
-
-        createTree(plantX, plantY);
-
+        createTree(currentX + 20, currentY + 60);
         updateEnvironment();
     }
-
 });
+
+window.addEventListener("keyup", (e) => {
+    keys[e.code] = false;
+})
